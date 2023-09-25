@@ -13,4 +13,15 @@ import java.util.UUID;
 
 			return BeerDto.builder().id(UUID.randomUUID()).beerName("Galaxy Cat").beerStyle("Pale Ale").build();
 		}
+
+		@Override
+		public BeerDto saveNewBeer(final BeerDto beerDto) {
+
+			return BeerDto.builder().id(UUID.randomUUID()).build();
+		}
+
+		@Override
+		public void updateBeer(final UUID beerId, final BeerDto beerDto) {
+			// todo: add the beer update
+		}
 	}
