@@ -3,6 +3,7 @@ package guru.springframework.sfgbrewery.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.sfgbrewery.services.BeerService;
 import guru.springframework.sfgbrewery.web.model.BeerDto;
+import guru.springframework.sfgbrewery.web.model.BeerStyle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,30 +29,24 @@ public class BeerControllerTest {
 
 	@MockBean
 	BeerService beerService;
-
 	@Autowired
 	MockMvc mockMvc;
-
 	@Autowired
 	ObjectMapper objectMapper;
-
 	BeerDto validBeer;
 
 	@Before
 	public void setUp() {
-
 		validBeer = BeerDto.builder().id(UUID.randomUUID())
 				.beerName("Beer1")
-				.beerStyle("Pale Ale")
+				.beerStyle(BeerStyle.ALE)
 				.upc(23242342532L)
 				.build();
 	}
 
 	@Test
 	public void getBeer() throws Exception {
-
 		given(beerService.getBeerById(any(UUID.class))).willReturn(validBeer);
-
 		mockMvc.perform(get("/api/v1/beer/" + validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -66,9 +61,7 @@ public class BeerControllerTest {
 		beerDto.setId(null);
 		BeerDto savedDto = BeerDto.builder().id(UUID.randomUUID()).beerName("New Beer").build();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-
 		given(beerService.saveNewBeer(any())).willReturn(savedDto);
-
 		mockMvc.perform(post("/api/v1/beer")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson))
@@ -80,13 +73,11 @@ public class BeerControllerTest {
 		//given
 		BeerDto beerDto = validBeer;
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-
 		//when
 		mockMvc.perform(put("/api/v1/beer/" + validBeer.getId())
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson))
 				.andExpect(status().isNoContent());
-
 		then(beerService).should().updateBeer(any(), any());
 	}
 }
