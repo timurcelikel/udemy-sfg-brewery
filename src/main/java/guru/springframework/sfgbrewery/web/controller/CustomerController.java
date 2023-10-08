@@ -39,12 +39,12 @@ public class CustomerController {
 	public ResponseEntity<HttpHeaders> handleUpdate(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDto customerDto) {
 
 		customerService.updateCustomer(customerId, customerDto);
-		return new ResponseEntity<HttpHeaders>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping("/{customerId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteCustomer(@PathVariable("customerId") UUID customerId) {
+	public void deleteById(@PathVariable("customerId") UUID customerId) {
 
 		customerService.deleteById(customerId);
 	}

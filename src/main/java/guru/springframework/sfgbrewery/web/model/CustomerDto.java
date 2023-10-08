@@ -15,5 +15,4 @@ public class CustomerDto {
 
 	private UUID id;
 	private String name;
-
 }
