@@ -25,7 +25,7 @@ public class BeerController {
 	@GetMapping("/{beerId}")
 	public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId) {
 		final BeerDto beerDto = beerService.getBeerById(beerId);
-		log.info(String.valueOf(beerDto));
+		log.info("Beer GET: " + beerDto);
 		return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
 	}
 
@@ -33,6 +33,7 @@ public class BeerController {
 	public ResponseEntity<HttpHeaders> handlePost(@RequestBody BeerDto beerDto) {
 
 		BeerDto savedDto = beerService.saveNewBeer(beerDto);
+		log.info("Beer POST: " + savedDto);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -43,6 +44,7 @@ public class BeerController {
 			@RequestBody BeerDto beerDto) {
 
 		beerService.updateBeer(beerId, beerDto);
+		log.info("Beer UPDATE: " + beerDto.getBeerName());
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -51,5 +53,6 @@ public class BeerController {
 	public void deleteBeer(@PathVariable("beerId") UUID beerId) {
 
 		beerService.deleteById(beerId);
+		log.info("Beer DELETE: " + beerId);
 	}
 }
