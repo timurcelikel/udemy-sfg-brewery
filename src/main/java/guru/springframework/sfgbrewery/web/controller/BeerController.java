@@ -23,10 +23,10 @@ public class BeerController {
 	}
 
 	@GetMapping("/{beerId}")
-	public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId) {
+	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
 		final BeerDto beerDto = beerService.getBeerById(beerId);
 		log.info("Beer GET: " + beerDto);
-		return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
+		return new ResponseEntity<>(beerDto, HttpStatus.OK);
 	}
 
 	@PostMapping
