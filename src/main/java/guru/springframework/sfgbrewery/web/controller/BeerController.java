@@ -2,6 +2,7 @@ package guru.springframework.sfgbrewery.web.controller;
 
 import guru.springframework.sfgbrewery.services.BeerService;
 import guru.springframework.sfgbrewery.web.model.BeerDto;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class BeerController {
 	}
 
 	@PostMapping
-	public ResponseEntity<HttpHeaders> handlePost(@RequestBody BeerDto beerDto) {
+	public ResponseEntity<HttpHeaders> handlePost(@Valid @RequestBody BeerDto beerDto) {
 
 		BeerDto savedDto = beerService.saveNewBeer(beerDto);
 		log.info("Beer POST: " + savedDto);
@@ -41,7 +42,7 @@ public class BeerController {
 
 	@PutMapping("/{beerId}")
 	public ResponseEntity<HttpHeaders> handleUpdate(@PathVariable("beerId") UUID beerId,
-			@RequestBody BeerDto beerDto) {
+			@Valid @RequestBody BeerDto beerDto) {
 
 		beerService.updateBeer(beerId, beerDto);
 		log.info("Beer UPDATE: " + beerDto.getBeerName());

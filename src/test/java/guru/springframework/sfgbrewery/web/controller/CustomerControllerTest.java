@@ -3,14 +3,12 @@ package guru.springframework.sfgbrewery.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.sfgbrewery.services.CustomerService;
 import guru.springframework.sfgbrewery.web.model.CustomerDto;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
@@ -22,9 +20,8 @@ import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(CustomerController.class)
-public class CustomerControllerTest {
+class CustomerControllerTest {
 
 	@MockBean
 	CustomerService customerService;
@@ -37,7 +34,7 @@ public class CustomerControllerTest {
 
 	CustomerDto validCustomer;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		validCustomer = CustomerDto.builder().id(UUID.randomUUID())
@@ -46,7 +43,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void getCustomer() throws Exception {
+	void getCustomer() throws Exception {
 
 		given(customerService.getCustomerById(any(UUID.class))).willReturn(validCustomer);
 
@@ -58,7 +55,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void handlePost() throws Exception {
+	void handlePost() throws Exception {
 		//given
 		CustomerDto customerDto = validCustomer;
 		customerDto.setId(null);
@@ -74,7 +71,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void handleUpdate() throws Exception {
+	void handleUpdate() throws Exception {
 		//given
 		CustomerDto customerDto = validCustomer;
 		String customerDtoJson = objectMapper.writeValueAsString(customerDto);
@@ -87,5 +84,4 @@ public class CustomerControllerTest {
 
 		then(customerService).should().updateCustomer(any(), any());
 	}
-
 }
