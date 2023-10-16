@@ -2,7 +2,6 @@ package guru.springframework.sfgbrewery.web.controller;
 
 import guru.springframework.sfgbrewery.services.BeerService;
 import guru.springframework.sfgbrewery.web.model.BeerDto;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -61,15 +58,5 @@ public class BeerController {
 
 		beerService.deleteById(beerId);
 		log.info("Beer DELETE: " + beerId);
-	}
-
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e) {
-		List<String> errors = new ArrayList<>((e.getConstraintViolations().size()));
-		e.getConstraintViolations().forEach(constraintViolation -> {
-			errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
-		});
-
-		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 	}
 }
