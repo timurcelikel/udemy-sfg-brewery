@@ -29,7 +29,7 @@ class BeerControllerTest {
 
 	@Autowired
 	MockMvc mockMvc;
-	
+
 	@Autowired
 	ObjectMapper objectMapper;
 
@@ -63,7 +63,7 @@ class BeerControllerTest {
 		BeerDto savedDto = BeerDto.builder().id(UUID.randomUUID()).beerName("New Beer").build();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 		given(beerService.saveNewBeer(any())).willReturn(savedDto);
-		mockMvc.perform(post("/api/v1/beer")
+		mockMvc.perform(post("/api/v1/beert")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson))
 				.andExpect(status().isCreated());
