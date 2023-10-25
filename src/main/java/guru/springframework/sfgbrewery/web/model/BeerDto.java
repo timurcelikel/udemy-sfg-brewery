@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -29,6 +30,9 @@ public class BeerDto {
 
 	@Positive
 	private Long upc;
+
+	@Positive
+	private BigDecimal price;
 
 	private OffsetDateTime createdDate;
 	private OffsetDateTime lastUpdatedDate;
