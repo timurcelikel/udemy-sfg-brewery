@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -27,6 +28,7 @@ class BaseTest {
 						OffsetDateTime.parse("2011-12-03T10:15:30+01:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME))
 				.price(new BigDecimal("12.99"))
 				.upc(121324343434L)
+				.myLocalDate(LocalDate.parse("2011-12-03"))
 				.build();
 	}
 }

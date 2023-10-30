@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -22,6 +23,7 @@ public class Beer {
 
 	private Timestamp createdDate;
 	private Timestamp lastUpdatedDate;
+	private LocalDate myLocalDate;
 }
 
 

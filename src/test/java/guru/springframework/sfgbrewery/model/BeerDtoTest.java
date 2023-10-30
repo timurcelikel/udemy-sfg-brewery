@@ -17,6 +17,7 @@ class BeerDtoTest extends BaseTest {
 					+ "\"beerStyle\":\"ALE\","
 					+ "\"upc\":121324343434,\"price\":12.99,\"createdDate\":\"2011-12-03T10:15:30+0100\","
 					+ "\"lastUpdatedDate\":\"2011-12-03T10:15:30+0100\","
+					+ "\"myLocalDate\":\"20111203\","
 					+ "\"beerId\":\"2d6dec31-6fac-4b00-aa7d-7c5fee3ccc35\"}";
 
 	final String toJSON =
@@ -24,6 +25,7 @@ class BeerDtoTest extends BaseTest {
 					+ "\"beerStyle\":\"ALE\","
 					+ "\"upc\":121324343434,\"price\":\"12.99\",\"createdDate\":\"2011-12-03T10:15:30+0100\","
 					+ "\"lastUpdatedDate\":\"2011-12-03T10:15:30+0100\","
+					+ "\"myLocalDate\":\"20111203\","
 					+ "\"beerId\":\"2d6dec31-6fac-4b00-aa7d-7c5fee3ccc35\"}";
 
 	@Test
@@ -42,5 +44,6 @@ class BeerDtoTest extends BaseTest {
 		log.info(dto.toString());
 		assertThat(dto.getId()).isEqualTo(UUID.fromString("2d6dec31-6fac-4b00-aa7d-7c5fee3ccc35"));
 		assertThat(dto.getBeerName()).isEqualTo("California Honey");
+		assertThat(dto.getMyLocalDate()).isEqualTo("2011-12-03");
 	}
 }

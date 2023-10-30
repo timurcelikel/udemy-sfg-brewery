@@ -23,6 +23,7 @@ class SnakeTest extends BaseTest {
 						+ "\"beer_style\":\"ALE\","
 						+ "\"upc\":121324343434,\"price\":\"12.99\",\"created_date\":\"2011-12-03T10:15:30+0100\","
 						+ "\"last_updated_date\":\"2011-12-03T10:15:30+0100\","
+						+ "\"my_local_date\":\"20111203\","
 						+ "\"beerId\":\"2d6dec31-6fac-4b00-aa7d-7c5fee3ccc35\"}";
 		assertThat(json).isEqualTo(expectedJSON);
 	}
