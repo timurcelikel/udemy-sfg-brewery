@@ -1,5 +1,7 @@
 package guru.springframework.sfgbrewery.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
@@ -19,6 +21,7 @@ import java.util.UUID;
 @Builder
 public class BeerDto {
 
+	@JsonProperty("beerId")
 	@Null
 	private UUID id;
 
@@ -31,9 +34,13 @@ public class BeerDto {
 	@Positive
 	private Long upc;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@Positive
 	private BigDecimal price;
 
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
 	private OffsetDateTime createdDate;
+
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
 	private OffsetDateTime lastUpdatedDate;
 }
